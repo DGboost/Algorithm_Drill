@@ -5,12 +5,7 @@ using namespace std;
 
 string solution(string my_string, int num1, int num2) 
 {
-    char temp;
-    
-    temp = my_string[num1]; 
-    my_string[num1] = my_string[num2];
-    my_string[num2] = temp;
-    
+    swap(my_string[num1], my_string[num2]);
     
     return my_string;
 }
