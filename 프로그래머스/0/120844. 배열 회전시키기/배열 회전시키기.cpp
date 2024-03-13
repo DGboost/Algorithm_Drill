@@ -1,26 +1,15 @@
 #include <string>
 #include <vector>
-#include <deque>
+#include <algorithm>
 
 using namespace std;
 
 vector<int> solution(vector<int> numbers, string direction) 
 {
-    deque<int> deq(numbers.begin(), numbers.end());
-    
     if (direction == "right")
-    {
-        int temp = deq.back();
-        deq.pop_back();
-        deq.push_front(temp);
-    }
+        rotate(numbers.begin(), numbers.end() - 1, numbers.end());
     else
-    {
-        int temp = deq.front();
-        deq.pop_front();
-        deq.push_back(temp);
-    }
+        rotate(numbers.begin(), numbers.begin() + 1, numbers.end());
     
-    vector<int> answer(deq.begin(), deq.end());
-    return answer;
+    return numbers;
 }
