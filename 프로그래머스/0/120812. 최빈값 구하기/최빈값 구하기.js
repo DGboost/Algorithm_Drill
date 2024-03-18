@@ -1,23 +1,24 @@
 function solution(array) {
     const frequency = {};
-    let maxFreq = 0;
-    let mode = -1;
-    
-    array.forEach(num => {
-        if (frequency[num])
-            frequency[num]++;
-        else
-            frequency[num] = 1;
-        
-        if (frequency[num] > maxFreq) {
-            maxFreq = frequency[num];
-            mode = num;
-		}
+    array.forEach(number => {
+        frequency[number] = (frequency[number] || 0) + 1;
     });
-    
-    const modes = Object.values(frequency).filter(freq => freq === maxFreq);
-    if (modes.length > 1)
-        return -1;
-    
-    return mode;
+
+    let maxFrequency = -1;
+    let maxFrequencyNumber = -1;
+    let dupChecker = false;
+
+    for (const number in frequency) {
+        if (frequency[number] === maxFrequency) {
+            dupChecker = true;
+        }
+
+        if (frequency[number] > maxFrequency) {
+            maxFrequencyNumber = parseInt(number);
+            maxFrequency = frequency[number];
+            dupChecker = false;
+        }
+    }
+
+    return dupChecker ? -1 : maxFrequencyNumber;
 }
