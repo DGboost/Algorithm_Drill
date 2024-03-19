@@ -1,16 +1,13 @@
 function isPrime(num) {
-    if (num < 2) 
-        return false;
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-        if (num % i === 0) 
-            return false;
+    if (num < 2) return false;
+    for (let i = 2; i * i <= num; i++) {
+        if (num % i === 0) return false;
     }
     return true;
 }
 
 function permutate(arr, str = '', permutations) {
-    if (str.length > 0) 
-        permutations.add(parseInt(str));
+    if (str.length > 0) permutations.add(parseInt(str));
   
     for (let i = 0; i < arr.length; i++) {
         let copy = [...arr];
@@ -22,13 +19,13 @@ function permutate(arr, str = '', permutations) {
 function solution(numbers) {
     const numArray = numbers.split('');
     let permutations = new Set();
-  
+    
     permutate(numArray, '', permutations);
-
+    
     let count = 0;
-    permutations.forEach(num => {
-        if (isPrime(num)) count++;
-    });
-  
+    for (let num of permutations)
+        if (isPrime(num))
+            ++count;
+    
     return count;
 }
